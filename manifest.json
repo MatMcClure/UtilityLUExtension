@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "CS2 Lineups",
+  "version": "1.0.0",
+  "description": "Search CS2 grenade lineups.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "CS2 Lineups"
+  },
+  "browser_specific_settings": {
+    "gecko": { "id": "cs2-lineups@yourname.example" }
+  }
+}

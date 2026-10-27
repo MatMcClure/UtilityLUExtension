@@ -1,0 +1,119 @@
+{
+  "dust2": [
+    {
+      "id": "dust2-suicide-mid-door-smoke",
+      "title": "Suicide Mid Door Smoke",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "dust2/shared/spawn.jpg"
+    },
+    {
+      "id": "dust2-barrel-mid-door-smoke",
+      "title": "Barrell Mid Door Smoke",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "dust2/shared/spawn.jpg"
+    },
+    {
+      "id": "dust2-long-corner-smoke",
+      "title": "Long Corner Smoke from T Spawn",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "Stand at the edge of T spawn facing the long doors sign. Line up the crosshair with the tip of the sign and throw.",
+      "image": "dust2/shared/spawn.jpg"
+    },
+    {
+      "id": "dust2-xbox-smoke",
+      "title": "CT Xbox Smoke",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "From mid, align with the antenna on the building, jump-throw to land the smoke on Xbox.",
+      "image": "dust2/shared/spawn.jpg"
+    },
+    {
+      "id": "dust2-b-door-smoke",
+      "title": "Door Smoke",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "dust2/shared/b.jpg"
+    },
+    {
+      "id": "dust2-b-window-smoke",
+      "title": "Window Smoke",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "dust2/shared/b.jpg"
+    }
+  ],
+  "mirage": [
+    {
+      "id": "mirage-window-smoke-pos1",
+      "title": "Mirage Insta Window Smoke 1",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "W + Jumpthrow",
+      "image": "mirage/shared/thumb.jpg",
+      "video": "mirage/insta-window-smoke-1/clip.mp4",
+      "detailImages": [
+        "mirage/insta-window-smoke-1/crosshair.jpg",
+        "mirage/shared/window-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "mirage-window-smoke-pos2",
+      "title": "Mirage Insta Window Smoke 2",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "W + Jumpthrow",
+      "image": "mirage/shared/thumb.jpg",
+      "video": "mirage/insta-window-smoke-2/clip.mp4",
+      "detailImages": [
+        "mirage/insta-window-smoke-2/crosshair.jpg",
+        "mirage/shared/window-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "mirage-window-smoke-pos3",
+      "title": "Mirage Insta Window Smoke 3",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "W + Jumpthrow",
+      "image": "mirage/shared/thumb.jpg",
+      "video": "mirage/insta-window-smoke-3/clip.mp4",
+      "detailImages": [
+        "mirage/insta-window-smoke-3/crosshair.jpg",
+        "mirage/shared/window-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "mirage-window-smoke-pos4",
+      "title": "Mirage Insta Window Smoke 4",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "W + Jumpthrow",
+      "image": "mirage/shared/thumb.jpg",
+      "video": "mirage/insta-window-smoke-4/clip.mp4",
+      "detailImages": [
+        "mirage/insta-window-smoke-4/crosshair.jpg",
+        "mirage/shared/window-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "mirage-window-smoke-pos5",
+      "title": "Mirage Insta Window Smoke 5",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "W + Jumpthrow",
+      "image": "mirage/shared/thumb.jpg",
+      "video": "mirage/insta-window-smoke-5/clip.mp4",
+      "detailImages": [
+        "mirage/insta-window-smoke-5/crosshair.jpg",
+        "mirage/shared/window-smoke-landing.jpg"
+      ]
+    }
+  ]
+}
