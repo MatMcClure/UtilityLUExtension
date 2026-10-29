@@ -115,5 +115,72 @@
         "mirage/shared/window-smoke-landing.jpg"
       ]
     }
+  ],
+    "ancient": [
+    {
+      "id": "ancient-smoke-pos1",
+      "title": "Ancient Insta Elbow Smoke 1",
+      "side": "CT",
+      "nadeType": "Smoke",
+      "description": "Shift + W + Jumpthrow",
+      "image": "ancient/shared/thumb.jpg",
+      "video": "ancient/insta-elbow-smoke-1/clip.mp4",
+      "detailImages": [
+        "ancient/insta-elbow-smoke-1/crosshair.jpg",
+        "ancient/shared/elbow-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "ancient-smoke-pos2",
+      "title": "Ancient Insta Elbow Smoke 2",
+      "side": "CT",
+      "nadeType": "Smoke",
+      "description": "Shift + W + Jumpthrow",
+      "image": "ancient/shared/thumb.jpg",
+      "video": "ancient/insta-elbow-smoke-2/clip.mp4",
+      "detailImages": [
+        "ancient/insta-elbow-smoke-2/crosshair.jpg",
+        "ancient/shared/elbow-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "ancient-smoke-pos3",
+      "title": "Ancient Insta Elbow Smoke 3",
+      "side": "CT",
+      "nadeType": "Smoke",
+      "description": "Shift + W + Jumpthrow",
+      "image": "ancient/shared/thumb.jpg",
+      "video": "ancient/insta-elbow-smoke-3/clip.mp4",
+      "detailImages": [
+        "ancient/insta-elbow-smoke-3/crosshair.jpg",
+        "ancient/shared/elbow-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "ancient-smoke-pos4",
+      "title": "Ancient Insta Elbow Smoke 4",
+      "side": "CT",
+      "nadeType": "Smoke",
+      "description": "Shift + W + Jumpthrow",
+      "image": "ancient/shared/thumb.jpg",
+      "video": "ancient/insta-elbow-smoke-4/clip.mp4",
+      "detailImages": [
+        "ancient/insta-elbow-smoke-4/crosshair.jpg",
+        "ancient/shared/elbow-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "ancient-smoke-pos5",
+      "title": "Ancient Insta Elbow Smoke 5",
+      "side": "CT",
+      "nadeType": "Smoke",
+      "description": "Shift + W + Jumpthrow",
+      "image": "ancient/shared/thumb.jpg",
+      "video": "ancient/insta-elbow-smoke-5/clip.mp4",
+      "detailImages": [
+        "ancient/insta-elbow-smoke-5/crosshair.jpg",
+        "ancient/shared/elbow-smoke-landing.jpg"
+      ]
+    }
   ]
 }
