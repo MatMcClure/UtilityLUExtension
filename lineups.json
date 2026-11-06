@@ -214,11 +214,11 @@
       "side": "T",
       "nadeType": "Molly",
       "description": "Jumpthrow",
-      "image": "ancient/shared/thumb.jpg",
-      "video": "ancient/insta-elbow-smoke-3/clip.mp4",
+      "image": "ancient/shared2/thumb.jpg",
+      "video": "ancient/jump-up-molly/clip.mp4",
       "detailImages": [
         "ancient/jump-up-molly/crosshair.jpg",
-        "ancient/shared/jump-up-molly-landing.jpg"
+        "ancient/shared2/jump-up-molly-landing.jpg"
       ]
     }
   ]
