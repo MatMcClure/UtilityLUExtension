@@ -181,6 +181,45 @@
         "ancient/insta-elbow-smoke-5/crosshair.jpg",
         "ancient/shared/elbow-smoke-landing.jpg"
       ]
+    },
+    {
+      "id": "ancient-red-room-smoke1",
+      "title": "Ancient Red Room Smoke 1",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "Jumpthrow",
+      "image": "ancient/shared/thumb.jpg",
+      "video": "ancient/red-room-smoke-1/clip.mp4",
+      "detailImages": [
+        "ancient/red-room-smoke-1/crosshair.jpg",
+        "ancient/shared/red-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "ancient-red-room-smoke2",
+      "title": "Ancient Red Room Smoke 2",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "Jumpthrow",
+      "image": "ancient/shared/thumb.jpg",
+      "video": "ancient/red-room-smoke-2/clip.mp4",
+      "detailImages": [
+        "ancient/red-room-smoke-2/crosshair.jpg",
+        "ancient/shared/red-room-smoke-landing.jpg"
+      ]
+    },
+    {
+      "id": "ancient-jump-up-molly",
+      "title": "Ancient Jump Up Molly",
+      "side": "T",
+      "nadeType": "Molly",
+      "description": "Jumpthrow",
+      "image": "ancient/shared/thumb.jpg",
+      "video": "ancient/insta-elbow-smoke-3/clip.mp4",
+      "detailImages": [
+        "ancient/jump-up-molly/crosshair.jpg",
+        "ancient/shared/jump-up-molly-landing.jpg"
+      ]
     }
   ]
 }
