@@ -1,11 +1,23 @@
 {
   "manifest_version": 3,
   "name": "CS2 Lineups",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Search CS2 grenade lineups.",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "icons": {
+    "16": "icons/csulogo.png",
+    "32": "icons/csulogo.png",
+    "48": "icons/csulogo.png",
+    "128": "icons/csulogo.png"
+  },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "CS2 Lineups"
+    "default_title": "CS2 Lineups",
+    "default_icon": {
+      "16": "icons/csulogo.png",
+      "32": "icons/csulogo.png"
+    }
   },
   "browser_specific_settings": {
     "gecko": { "id": "cs2-lineups@yourname.example" }
