@@ -97,11 +97,17 @@ function renderResults() {
 function showDetail(index) {
   const l = results[index];
   const media = l.video
-    ? `<video src="${mediaUrl(l.video)}" controls autoplay loop muted></video>`
+    ? `<video src="${mediaUrl(l.video)}" controls controlslist="nofullscreen" autoplay loop muted></video>`
     : `<img class="hero" src="${thumb(l)}" data-map="${l.mapId}" alt="" />`;
-  const extras = (l.detailImages ?? [])
-    .map((p) => `<a href="${mediaUrl(p)}" target="_blank"><img src="${mediaUrl(p)}" alt="" /></a>`)
-    .join("");
+  const extras =
+    MEDIA_BASE
+      ? (l.detailImages ?? [])
+          .map(
+            (p) =>
+              `<img class="zoomable" src="${mediaUrl(p)}" data-map="${l.mapId}" alt="" />`
+          )
+          .join("")
+      : "";
 
   app.innerHTML = `
     <div class="detail-nav">
@@ -118,10 +124,94 @@ function showDetail(index) {
     <div class="extras">${extras}</div>
   `;
   attachImageFallbacks(app);
+
+  // Attach zoom handlers AFTER the detail view is rendered
+  app.querySelectorAll(".extras img.zoomable").forEach((img) =>
+    img.addEventListener("click", () => openZoom(img.src))
+  );
+
   document.getElementById("back").onclick = showSearch;
   document.getElementById("prev").onclick = () =>
     showDetail(index === 0 ? results.length - 1 : index - 1);
   document.getElementById("next").onclick = () => showDetail((index + 1) % results.length);
+}
+
+// New: shows the image centered on the web page you're viewing
+async function openZoom(src) {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      args: [src],
+      func: (imgSrc) => {
+        document.getElementById("cs2-lineup-lightbox")?.remove();
+
+        const overlay = document.createElement("div");
+        overlay.id = "cs2-lineup-lightbox";
+        overlay.style.cssText =
+          "position:fixed;inset:0;z-index:2147483647;display:flex;" +
+          "align-items:center;justify-content:center;background:rgba(0,0,0,0.6);cursor:zoom-out;";
+
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.style.cssText =
+          "max-width:80vw;max-height:80vh;border-radius:10px;" +
+          "box-shadow:0 10px 40px rgba(0,0,0,0.6);";
+        overlay.appendChild(img);
+
+        const close = () => {
+          overlay.remove();
+          document.removeEventListener("keydown", onKey, true);
+        };
+        const onKey = (e) => {
+          if (e.key === "Escape") close();
+        };
+
+        overlay.addEventListener("click", close);
+        document.addEventListener("keydown", onKey, true);
+        document.body.appendChild(overlay);
+      },
+    });
+  } catch (err) {
+    console.error("Lightbox injection failed:", err);
+    alert("Injection failed: " + err.message);
+    openZoomInPopup(src);
+  }
+}
+
+// Your old overlay code, renamed, used as the fallback
+function openZoomInPopup(src) {
+  document.querySelector(".zoom-overlay")?.remove();
+  const overlay = document.createElement("div");
+  overlay.className = "zoom-overlay";
+  overlay.innerHTML = `
+    <img src="${src}" alt="" />
+    <button class="zoom-close" aria-label="Close">&times;</button>
+  `;
+
+  const close = () => {
+    overlay.remove();
+    document.removeEventListener("keydown", onKey, true);
+  };
+
+  const onKey = (e) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      e.stopPropagation();
+      close();
+    }
+  };
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target.tagName === "IMG") {
+      e.target.classList.toggle("actual-size");
+    } else {
+      close();
+    }
+  });
+
+  document.addEventListener("keydown", onKey, true);
+  document.body.appendChild(overlay);
 }
 
 showSearch();

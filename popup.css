@@ -63,3 +63,43 @@ video, .hero { width: 100%; border-radius: 8px; background: #000; margin-top: 8p
 .badge { display: inline-block; font-size: 0.7rem; padding: 3px 10px; border-radius: 999px; font-weight: 600; }
 .badge.t { background: #d4a017; color: #1a1a1a; }
 .badge.ct { background: #4a90d9; color: #1a1a1a; }
+
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  z-index: 100;
+  cursor: zoom-out;
+}
+
+.zoom-overlay img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  cursor: zoom-in;
+}
+
+.zoom-overlay img.actual-size {
+  max-width: none;
+  max-height: none;
+  cursor: zoom-out;
+}
+
+.zoom-close {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 1;
+}
