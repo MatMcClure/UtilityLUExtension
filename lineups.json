@@ -116,7 +116,17 @@
       ]
     }
   ],
-    "ancient": [
+  "nuke": [
+    {
+      "id": "nuke",
+      "title": "Cross Smokes",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "nuke/shared/thumb.jpg"
+    }
+  ],
+  "ancient": [
     {
       "id": "ancient-smoke-pos1",
       "title": "Ancient Insta Elbow Smoke 1",
@@ -220,6 +230,36 @@
         "ancient/jump-up-molly/crosshair.jpg",
         "ancient/shared2/jump-up-molly-landing.jpg"
       ]
+    }
+  ],
+  "inferno": [
+    {
+      "id": "inferno",
+      "title": "",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "inferno/shared/thumb.jpg"
+    }
+  ],
+  "anubis": [
+    {
+      "id": "anubis",
+      "title": "",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "anubis/shared/thumb.jpg"
+    }
+  ],
+  "cache": [
+    {
+      "id": "cache",
+      "title": "",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "cache/shared/thumb.jpg"
     }
   ]
 }
