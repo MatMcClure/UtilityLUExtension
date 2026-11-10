@@ -114,7 +114,21 @@
         "mirage/insta-window-smoke-5/crosshair.jpg",
         "mirage/shared/window-smoke-landing.jpg"
       ]
-    }
+    },
+    {
+      "id": "mirage-cross-smokes",
+      "title": "Mirage Cross Smokes",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "Jumpthrow",
+      "image": "mirage/shared/thumb.jpg",
+      "video": "mirage/cross-smokes/clip.mp4",
+      "detailImages": [
+        "mirage/cross-smokes/crosshair1.jpg",
+        "mirage/cross-smokes/crosshair2.jpg",
+        "mirage/shared/cross-smokes-landing.jpg"
+      ]
+    }    
   ],
   "nuke": [
     {
