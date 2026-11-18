@@ -77,15 +77,9 @@ video, .hero { width: 100%; border-radius: 8px; background: #000; margin-top: 8p
 }
 
 .zoom-overlay img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 85%;
+  max-height: 85%;
   object-fit: contain;
-  cursor: zoom-in;
-}
-
-.zoom-overlay img.actual-size {
-  max-width: none;
-  max-height: none;
   cursor: zoom-out;
 }
 
