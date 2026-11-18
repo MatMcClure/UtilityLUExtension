@@ -1,4 +1,4 @@
-const MEDIA_BASE = "";
+const MEDIA_BASE = "https://pub-156a980147924e48b583cf785ef4142f.r2.dev"; // your R2 public URL
 const mediaUrl = (p) => `${MEDIA_BASE}/${p}`;
 
 const MAP_IMAGES = {
@@ -97,7 +97,8 @@ function renderResults() {
 function showDetail(index) {
   const l = results[index];
   const media = l.video
-    ? `<video src="${mediaUrl(l.video)}" controls controlslist="nofullscreen" autoplay loop muted></video>`
+    ? `<video src="${mediaUrl(l.video)}" controls controlslist="nofullscreen" autoplay loop muted></video>
+       <button id="open-video" class="open-video">⛶ Pop out video</button>`
     : `<img class="hero" src="${thumb(l)}" data-map="${l.mapId}" alt="" />`;
   const extras =
     MEDIA_BASE
@@ -129,6 +130,10 @@ function showDetail(index) {
     img.addEventListener("click", () => openZoom(img.src))
   );
 
+  document
+    .getElementById("open-video")
+    ?.addEventListener("click", () => openVideoOnPage(mediaUrl(l.video)));
+
   document.getElementById("back").onclick = showSearch;
   document.getElementById("prev").onclick = () =>
     showDetail(index === 0 ? results.length - 1 : index - 1);
@@ -137,10 +142,14 @@ function showDetail(index) {
 
 let pageLightboxOpen = false;
 
+const isRestrictedUrl = (url = "") =>
+  /^(chrome|edge|about|chrome-extension):/.test(url) ||
+  url.startsWith("https://chromewebstore.google.com");
+
 async function openZoom(src) {
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (!tab || /^(chrome|edge|about|chrome-extension):/.test(tab.url ?? "")) {
+    if (!tab || isRestrictedUrl(tab.url ?? "")) {
       throw new Error("Restricted page");
     }
     await chrome.scripting.executeScript({
@@ -174,24 +183,79 @@ async function openZoom(src) {
   }
 }
 
-// Esc: close the page image first, then the popup on the next press
+// Pops the video out onto the web page, where the fullscreen button works
+async function openVideoOnPage(src) {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab || isRestrictedUrl(tab.url ?? "")) {
+      throw new Error("Restricted page");
+    }
+    await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      args: [src],
+      func: (videoSrc) => {
+        document.getElementById("cs2-video-lightbox")?.remove();
+
+        const overlay = document.createElement("div");
+        overlay.id = "cs2-video-lightbox";
+        overlay.style.cssText =
+          "position:fixed;inset:0;z-index:2147483647;display:flex;" +
+          "align-items:center;justify-content:center;background:rgba(0,0,0,0.8);";
+
+        const video = document.createElement("video");
+        video.src = videoSrc;
+        video.controls = true; // fullscreen works here: the click happens on the page
+        video.autoplay = true;
+        video.loop = true;
+        video.style.cssText = "max-width:80vw;max-height:80vh;border-radius:10px;";
+
+        const close = document.createElement("button");
+        close.textContent = "×";
+        close.style.cssText =
+          "position:absolute;top:16px;right:16px;font-size:28px;color:#fff;" +
+          "background:rgba(0,0,0,0.6);border:none;width:44px;height:44px;" +
+          "border-radius:50%;cursor:pointer;";
+        close.onclick = () => overlay.remove();
+
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) overlay.remove();
+        });
+        overlay.append(video, close);
+        document.body.appendChild(overlay);
+      },
+    });
+    pageLightboxOpen = true;
+  } catch (err) {
+    console.error("Video pop-out failed:", err);
+    alert("Can't pop out the video on this page. Open a regular website and try again.");
+  }
+}
+
+// Esc: close the page image/video first, then the popup on the next press
 document.addEventListener(
   "keydown",
   async (e) => {
     if (e.key !== "Escape" || !pageLightboxOpen) return;
     e.preventDefault();
     e.stopPropagation();
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    const [{ result }] = await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: () => {
-        const el = document.getElementById("cs2-lineup-lightbox");
-        if (!el) return false;
-        el.remove();
-        return true;
-      },
-    });
-    if (!result) {
+    try {
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      const [{ result }] = await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: () => {
+          const el =
+            document.getElementById("cs2-lineup-lightbox") ||
+            document.getElementById("cs2-video-lightbox");
+          if (!el) return false;
+          el.remove();
+          return true;
+        },
+      });
+      if (!result) {
+        pageLightboxOpen = false;
+        window.close();
+      }
+    } catch {
       pageLightboxOpen = false;
       window.close();
     }
