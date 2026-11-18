@@ -1,4 +1,4 @@
-const MEDIA_BASE = "https://pub-156a980147924e48b583cf785ef4142f.r2.dev"; // your R2 public URL
+const MEDIA_BASE = "";
 const mediaUrl = (p) => `${MEDIA_BASE}/${p}`;
 
 const MAP_IMAGES = {
