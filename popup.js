@@ -125,7 +125,6 @@ function showDetail(index) {
   `;
   attachImageFallbacks(app);
 
-  // Attach zoom handlers AFTER the detail view is rendered
   app.querySelectorAll(".extras img.zoomable").forEach((img) =>
     img.addEventListener("click", () => openZoom(img.src))
   );
@@ -136,10 +135,14 @@ function showDetail(index) {
   document.getElementById("next").onclick = () => showDetail((index + 1) % results.length);
 }
 
-// New: shows the image centered on the web page you're viewing
+let pageLightboxOpen = false;
+
 async function openZoom(src) {
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab || /^(chrome|edge|about|chrome-extension):/.test(tab.url ?? "")) {
+      throw new Error("Restricted page");
+    }
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
       args: [src],
@@ -155,33 +158,51 @@ async function openZoom(src) {
         const img = document.createElement("img");
         img.src = imgSrc;
         img.style.cssText =
-          "max-width:80vw;max-height:80vh;border-radius:10px;" +
+          "max-width:50vw;max-height:50vh;border-radius:10px;" +
           "box-shadow:0 10px 40px rgba(0,0,0,0.6);";
         overlay.appendChild(img);
 
-        const close = () => {
-          overlay.remove();
-          document.removeEventListener("keydown", onKey, true);
-        };
-        const onKey = (e) => {
-          if (e.key === "Escape") close();
-        };
-
-        overlay.addEventListener("click", close);
-        document.addEventListener("keydown", onKey, true);
+        // click anywhere (image or backdrop) closes it
+        overlay.addEventListener("click", () => overlay.remove());
         document.body.appendChild(overlay);
       },
     });
+    pageLightboxOpen = true;
   } catch (err) {
     console.error("Lightbox injection failed:", err);
-    alert("Injection failed: " + err.message);
     openZoomInPopup(src);
   }
 }
 
-// Your old overlay code, renamed, used as the fallback
+// Esc: close the page image first, then the popup on the next press
+document.addEventListener(
+  "keydown",
+  async (e) => {
+    if (e.key !== "Escape" || !pageLightboxOpen) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const [{ result }] = await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: () => {
+        const el = document.getElementById("cs2-lineup-lightbox");
+        if (!el) return false;
+        el.remove();
+        return true;
+      },
+    });
+    if (!result) {
+      pageLightboxOpen = false;
+      window.close();
+    }
+  },
+  true
+);
+
+// Fallback for pages that can't be injected into (new tab, chrome://, etc.)
 function openZoomInPopup(src) {
   document.querySelector(".zoom-overlay")?.remove();
+
   const overlay = document.createElement("div");
   overlay.className = "zoom-overlay";
   overlay.innerHTML = `
@@ -202,14 +223,7 @@ function openZoomInPopup(src) {
     }
   };
 
-  overlay.addEventListener("click", (e) => {
-    if (e.target.tagName === "IMG") {
-      e.target.classList.toggle("actual-size");
-    } else {
-      close();
-    }
-  });
-
+  overlay.addEventListener("click", close);
   document.addEventListener("keydown", onKey, true);
   document.body.appendChild(overlay);
 }
