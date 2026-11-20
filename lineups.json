@@ -259,6 +259,22 @@
   "anubis": [
     {
       "id": "anubis",
+      "title": "E Box Smoke",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "anubis/shared/thumb.jpg"
+    },
+    {
+      "id": "anubis",
+      "title": "B Smokes",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "",
+      "image": "anubis/shared/thumb.jpg"
+    },
+    {
+      "id": "anubis",
       "title": "",
       "side": "T",
       "nadeType": "Smoke",
@@ -269,11 +285,27 @@
   "cache": [
     {
       "id": "cache",
-      "title": "",
+      "title": "Z Smoke",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "W + Jumpthrow",
+      "image": "cache/shared/thumb.jpg"
+    },
+    {
+      "id": "cache",
+      "title": "A Cross Smoke",
+      "side": "T",
+      "nadeType": "Smoke",
+      "description": "Crouch + Jumpthrow",
+      "image": "cache/shared/thumb.jpg"
+    },
+    {
+      "id": "cache",
+      "title": "Cat/Highway Drop Smoke",
       "side": "T",
       "nadeType": "Smoke",
       "description": "",
       "image": "cache/shared/thumb.jpg"
-    }
+    }    
   ]
 }
